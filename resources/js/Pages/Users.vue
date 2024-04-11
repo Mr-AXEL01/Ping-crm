@@ -1,13 +1,16 @@
 <template>
-    <h1>Users</h1>
+    <Layout>
+        <h1 className="font-bold text-2xl">
+            Users
+        </h1>
+    </Layout>
 
-    <Nav/>
 </template>
 
 <script>
-import Nav from "../Shared/Nav.vue";
+import Layout from "../Shared/Layout.vue";
 
 export default {
-    components: {Nav},
+    components: {Layout},
 };
 </script>
