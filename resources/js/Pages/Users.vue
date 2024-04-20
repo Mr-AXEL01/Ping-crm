@@ -1,9 +1,15 @@
 <template>
-    <h1 className="font-bold text-2xl">
-        Users
-    </h1>
+    <Head><title>Users</title></Head>
 
-    <table class="min-w-full divide-y divide-gray-200 overflow-x-auto">
+    <div class="flex justify-between mb-6 ">
+        <h1 class="text-3xl">
+            Users
+        </h1>
+
+        <input v-model="search" type="text" placeholder="search..." class="border px-2 rounded-lg" />
+    </div>
+
+    <table class="min-w-full border rounded-[20px] divide-y divide-gray-200 overflow-x-auto">
         <tbody class="bg-white divide-y divide-gray-200">
         <tr v-for="user in users.data" :key="user.id">
             <td class="px-6 py-4 whitespace-nowrap">
@@ -33,6 +39,9 @@
 <script>
 import Layout from "../Shared/Layout.vue";
 import Pagination from "../Shared/Pagination.vue";
+import { ref , watch} from 'vue';
+import {Inertia} from "@inertiajs/inertia";
+
 
 export default {
     components: {Pagination },
@@ -40,6 +49,21 @@ export default {
 
     props:{
       users: Object,
+        filters: Object
+    },
+    setup() {
+        const search = ref('');
+
+
+        watch(search, value => {
+            Inertia.get('/users', {search:value}, {
+                preserveState:true
+            });
+        });
+
+        return {
+            search,
+        };
     },
 };
 </script>

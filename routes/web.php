@@ -13,6 +13,7 @@ Route::group(["middleware" => "auth"], function () {
 });
 
 Route::get("/login", [LoginController::class, 'create'])->name("login");
+Route::post("/login", [LoginController::class, 'store']);
 
 
 Route::get('/users/Index', function () {
